@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>弹出对话框</title>
+    <style>
+        .dialog {
+            display: none; /* 初始状态隐藏 */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .show {
+            display: block; /* 显示对话框 */
+        }
+    </style>
+    <script type="text/javascript">
+        function onloadPage() {
+       			var nodes = [
+
+                    "DOCS/化学/云南省级/2023年",
+                    "DOCS/化学/内蒙包头/2023年",
+                    "DOCS/化学/内蒙赤峰/2023年",
+                    "DOCS/化学/内蒙通辽/2023年",
+                    "DOCS/化学/吉林省级/2023年",
+                    "DOCS/化学/四川乐山/2023年",
+                    "DOCS/化学/四川内江/2023年",
+                    "DOCS/化学/四川凉山/2023年",
+                    "DOCS/化学/四川南充/2023年",
+                    "DOCS/化学/四川宜宾/2023年",
+                    "DOCS/化学/四川广安/2023年",
+                    "DOCS/化学/四川德阳/2023年",
+                    "DOCS/化学/四川成都/2023年",
+                    "DOCS/化学/四川眉山/2023年",
+                    "DOCS/化学/四川自贡/2023年",
+                    "DOCS/化学/四川达州/2023年",
+                    "DOCS/化学/四川雅安/2023年",
+                    "DOCS/化学/天津省级/2023年",
+                    "DOCS/化学/安徽省级/2023年",
+                    "DOCS/化学/山东临沂/2023年",
+                    "DOCS/化学/山东威海/2023年",
+                    "DOCS/化学/山东枣庄/2023年",
+                    "DOCS/化学/山东泰安/2023年",
+                    "DOCS/化学/山东济南/2023年",
+                    "DOCS/化学/山东济宁/2023年",
+                    "DOCS/化学/山东滨州/2023年",
+                    "DOCS/化学/山东潍坊/2023年",
+                    "DOCS/化学/山东聊城/2023年",
+                    "DOCS/化学/山东青岛/2023年",
+                    "DOCS/化学/山西省级/2023年",
+                    "DOCS/化学/广东广州/2023年",
+                    "DOCS/化学/广东深圳/2023年",
+                    "DOCS/化学/广东省级/2023年",
+                    "DOCS/化学/广西省级/2023年",
+                    "DOCS/化学/新疆省级/2023年",
+                    "DOCS/化学/江苏宿迁/2023年",
+                    "DOCS/化学/江苏扬州/2023年",
+                    "DOCS/化学/江苏连云/2023年",
+                    "DOCS/化学/江西省级/2023年",
+                    "DOCS/化学/河北省级/2023年",
+                    "DOCS/化学/河南省级/2023年",
+                    "DOCS/化学/湖北咸宁/2023年",
+                    "DOCS/化学/湖北宜昌/2023年",
+                    "DOCS/化学/湖北武汉/2023年",
+                    "DOCS/化学/湖北油田/2023年",
+                    "DOCS/化学/湖北荆州/2023年",
+                    "DOCS/化学/湖北鄂州/2023年",
+                    "DOCS/化学/湖南岳阳/2023年",
+                    "DOCS/化学/湖南怀化/2023年",
+                    "DOCS/化学/湖南株洲/2023年",
+                    "DOCS/化学/湖南永州/2023年",
+                    "DOCS/化学/湖南湘潭/2023年",
+                    "DOCS/化学/湖南益阳/2023年",
+                    "DOCS/化学/湖南衡阳/2023年",
+                    "DOCS/化学/湖南邵阳/2023年",
+                    "DOCS/化学/湖南郴州/2023年",
+                    "DOCS/化学/湖南长沙/2023年",
+                    "DOCS/化学/甘肃平凉/2023年",
+                    "DOCS/化学/甘肃武威/2023年",
+                    "DOCS/化学/甘肃白银/2023年",
+                    "DOCS/化学/甘肃金昌/2023年",
+                    "DOCS/化学/福建省级/2023年",
+                    "DOCS/化学/辽宁丹东/2023年",
+                    "DOCS/化学/辽宁抚本/2023年",
+                    "DOCS/化学/辽宁铁葫/2023年",
+                    "DOCS/化学/辽宁锦州/2023年",
+                    "DOCS/化学/重庆省A/2023年",
+                    "DOCS/化学/重庆省B/2023年",
+                    "DOCS/化学/陕西省级/2023年",
+                    "DOCS/化学/黑龙哈尔/2023年",
+                    "DOCS/化学/黑龙哈综/2023年",
+                    "DOCS/化学/黑龙牡丹/2023年",
+                    "DOCS/化学/黑龙齐齐/2023年",
+                    "DOCS/化学/黑龙龙东/2023年"
+
+
+
+                ];
+
+            //var nodes = ["DOCS/中考/数学/上海省级/2023年","DOCS/中考/数学/云南省级/2023年","DOCS/中考/数学/内蒙包头/2023年","DOCS/中考/数学/内蒙赤峰/2023年"];
+
+            var location = decodeURIComponent(window.location);
+
+            var CNT = 30;
+            var div = document.getElementById("div-nodes");
+            for (var i = 0; i < nodes.length; i++) {
+                var params = nodes;
+                div.innerHTML += "<label><input type=\"radio\" name=\"radio\"  onclick='showDialog(\"" + nodes[i] + "\")' />" + nodes[i] + "</label><p>";
+                if (i % 10 == 0) {
+                    div.innerHTML += "<p>";
+                }
+            }
+
+        }
+
+    </script>
+</head>
+<body onload="onloadPage();">
+<div id="div-nodes"></div>
+<script>
+
+    function showDialog( dataPath ) {
+        // 创建一个新的div元素作为对话框的容器
+        var dialogContainer = document.createElement("div");
+
+        // 设置对话框容器的样式属性（如位置、大小等）
+        dialogContainer.style.position = "fixed";
+        dialogContainer.style.top = "50%";
+        dialogContainer.style.left = "50%";
+        dialogContainer.style.transform = "translate(-50%, -50%)";
+        dialogContainer.style.width = "70%";
+        dialogContainer.style.height = "80%";
+        dialogContainer.style.background = "#fff";
+        dialogContainer.style.borderRadius = "10px";
+        dialogContainer.style.boxShadow = "2px 2px 8px rgba(0, 0, 0, 0.2)";
+        dialogContainer.style.zIndex = "9999";
+
+        // 创建一个iframe元素，并指定src属性为所需页面的URL
+        var iframeElement = document.createElement("iframe");
+        iframeElement.setAttribute("src", "paper.html#"+dataPath);
+        iframeElement.style.width = "100%";
+        iframeElement.style.height = "100%";
+        iframeElement.style.border = "none";
+
+        // 将iframe元素添加到对话框容器中
+        dialogContainer.appendChild(iframeElement);
+
+        // 将对话框容器添加到文档的body部分
+        document.body.appendChild(dialogContainer);
+    }
+
+</script>
+</body>
+</html>
